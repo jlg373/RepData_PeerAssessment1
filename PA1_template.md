@@ -43,7 +43,7 @@ library(dplyr)
 ```r
 library(ggplot2)
 daytotal <- data %>% select(steps,date) %>% group_by(date) %>% summarize(total = sum(steps, na.rm = TRUE))
-daytotal %>% ggplot(aes(date, total)) + geom_col() + labs(y="total steps", title = "Total Number of Steps Per Day") + theme(axis.text.x = element_text(angle = -90, hjust = 1))
+daytotal %>% ggplot(aes(total)) + geom_histogram(binwidth = 1000) + labs(y="counts", x = "total number of steps", title = "Histogram of Total Number of Steps Per Day") + theme(axis.text.x = element_text(angle = -90, hjust = 1))
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
@@ -122,7 +122,7 @@ Make a histogram of total steps per day with this new dataset,
 
 ```r
 daytotal2 <- data2 %>% select(steps,date) %>% group_by(date) %>% summarize(total = sum(steps, na.rm = TRUE))
-daytotal2 %>% ggplot(aes(date, total)) + geom_col() + labs(y="total steps", title = "Total Number of Steps Per Day") + theme(axis.text.x = element_text(angle = -90, hjust = 1))
+daytotal2 %>% ggplot(aes(total)) + geom_histogram(binwidth = 1000) + labs(y="counts", x="total number of steps", title = "Histogram of Total Number of Steps Per Day") + theme(axis.text.x = element_text(angle = -90, hjust = 1))
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
@@ -147,7 +147,7 @@ median(daytotal2$total)
 ```
 
 
-These are both larger than the previous mean and median estimate.  Imputing missing data increases the total number of steps per day.
+These are both larger than the previous mean and median estimate.  Imputing missing data increases the total number of steps per day.  This is because most of the missing data was for entire days.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
